@@ -36,7 +36,7 @@ export const Category = () => {
   useEffect(() => {
     if (list[0].link === gender) {
       setIndex(0);
-    } else {
+    } else if (list[1].link === gender) {
       setIndex(1);
     }
   }, [gender]);
