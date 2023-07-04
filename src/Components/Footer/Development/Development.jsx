@@ -3,13 +3,13 @@ import style from './Development.module.scss';
 export const Development = () => (
   <div className={style.development}>
     <ul className={style.developmentList}>
-      <li>
+      <li className={style.developmentItem}>
         Designer:{' '}
-        <a className={style.link} href="#">
+        <a className={style.link} href="https://t.me/Mrshmallowww">
           Anastasia Ilina
         </a>
       </li>
-      <li>
+      <li className={style.developmentItem}>
         Developer:{' '}
         <a className={style.link} href="mailto:web-master@rootdiv.ru">
           Владимир
