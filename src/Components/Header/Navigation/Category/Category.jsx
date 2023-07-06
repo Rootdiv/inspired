@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import style from './Category.module.scss';
+import cn from 'classnames';
 
 const list = [
   {
@@ -29,23 +29,17 @@ const list = [
 
 export const Category = () => {
   const location = useLocation();
-  const gender = location.pathname.slice(1);
+  const gender = location.pathname.split('/')[1] || 'women';
 
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (list[0].link === gender) {
-      setIndex(0);
-    } else if (list[1].link === gender) {
-      setIndex(1);
-    }
-  }, [gender]);
+  const categoriesList = list.find(item => item.link === gender);
 
   return (
     <ul className={style.category}>
-      {list[index].categories.map(category => (
+      {categoriesList.categories.map(category => (
         <li key={category.link}>
-          <NavLink className={style.link} to={`${list[index].link}/${category.link}`}>
+          <NavLink
+            className={({ isActive }) => cn(style.link, isActive && style.linkActive)}
+            to={`${gender}/${category.link}`}>
             {category.title}
           </NavLink>
         </li>
