@@ -5,6 +5,7 @@ import { ErrorPage } from '@/Components/ErrorPage/ErrorPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchNavigation } from '@/features/navigationSlice';
+import { fetchColors } from '@/features/colorsSlice';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(fetchNavigation());
+    dispatch(fetchColors());
   }, [dispatch]);
 
   return <RouterProvider router={router} />;
