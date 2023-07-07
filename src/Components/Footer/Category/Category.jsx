@@ -10,17 +10,17 @@ export const Category = () => {
     <div className={style.category}>
       <h2 className={cn(style.title, style.categoryTitle)}>Каталог</h2>
       <ul className={style.categoryList}>
-        {genderList.map(item => (
-          <li key={item} className={style.categoryItem}>
+        {genderList.map(gender => (
+          <li key={gender} className={style.categoryItem}>
             <h3 className={style.categorySubtitle}>
-              <NavLink className={style.link} to={item}>
-                {categories[item].title}
+              <NavLink className={style.link} to={gender}>
+                {categories[gender].title}
               </NavLink>
             </h3>
             <ul className={style.categorySublist}>
-              {categories[item].list.map(category => (
+              {categories[gender].list.map(category => (
                 <li key={category.slug} className={style.categorySubitem}>
-                  <NavLink className={style.link} to={`${item}/${category.slug}`}>
+                  <NavLink className={style.link} to={`${gender}/${category.slug}`}>
                     {category.title}
                   </NavLink>
                 </li>

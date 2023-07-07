@@ -1,7 +1,6 @@
 import { Container } from '@/Components/Layout/Container/Container';
 import { Gender } from './Gender/Gender';
 import { Category } from './Category/Category';
-import style from './Navigation.module.scss';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -17,7 +16,7 @@ export const Navigation = () => {
   }, [gender, dispatch]);
 
   return (
-    <nav className={style.navigation}>
+    <nav>
       <Container>
         <Gender />
         <Category />
