@@ -6,7 +6,7 @@ import { ColorList } from '@/Components/ColorList/ColorList';
 
 export const Product = ({ id, pic, title, price, colors }) => (
   <article className={style.product}>
-    <NavLink href={`product/${id}`} className={style.product}>
+    <NavLink href={`/product/${id}`} className={style.product}>
       <img src={`${API_URL}/${pic}`} alt="" className={style.image} />
       <h3 className={style.title}>{title}</h3>
     </NavLink>
