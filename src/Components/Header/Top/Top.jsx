@@ -4,7 +4,7 @@ import cn from 'classnames';
 import logo from '@/assets/logo.svg';
 import { ReactComponent as SearchSvg } from '@/assets/search.svg';
 import { ReactComponent as CartSvg } from '@/assets/cart.svg';
-import { ReactComponent as FavoritesSvg } from '@/assets/favorites.svg';
+import { ReactComponent as FavoritesSvg } from '@/assets/heart.svg';
 
 export const Top = () => (
   <div className={style.top}>

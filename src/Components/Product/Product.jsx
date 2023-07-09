@@ -1,7 +1,7 @@
 import { API_URL } from '@/const';
 import style from './Product.module.scss';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as LikeSvg } from '@/assets/favorites.svg';
+import { ReactComponent as LikeSvg } from '@/assets/heart.svg';
 import { ColorList } from '@/Components/ColorList/ColorList';
 
 export const Product = ({ id, pic, title, price, colors }) => (
