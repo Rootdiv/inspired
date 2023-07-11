@@ -9,6 +9,7 @@ export const fetchGender = createAsyncThunk('goods/fetchGender', async gender =>
 });
 
 export const fetchCategory = createAsyncThunk('goods/fetchCategory', async param => {
+  console.log('param: ', param);
   const url = new URL(GOODS_URL);
   for (const key in param) {
     url.searchParams.append(key, param[key]);
