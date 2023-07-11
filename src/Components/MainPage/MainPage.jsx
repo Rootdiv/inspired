@@ -11,9 +11,6 @@ export const MainPage = () => {
   const dispatch = useDispatch();
   const { activeGender, categories } = useSelector(state => state.navigation);
 
-  //Показываем баннер если в category что-то есть
-  const isShowBanner = gender && !category;
-
   const genderData = categories[activeGender];
   const categoryData = genderData?.list.find(item => item.slug === category);
 
@@ -35,7 +32,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isShowBanner && <Banner data={genderData?.banner} />}
+      {!category && <Banner data={genderData?.banner} />}
       <Goods title={categoryData?.title} />
     </>
   );
