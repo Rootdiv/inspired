@@ -1,0 +1,11 @@
+.favorites {
+  color: transparent;
+
+  &:hover {
+    color: #ff6347;
+  }
+}
+
+.active {
+  color: #dc143c;
+}

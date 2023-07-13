@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom';
 import { API_URL } from '@/const';
 import cn from 'classnames';
 import { ColorList } from '@/Components/ColorList/ColorList';
-import { ReactComponent as LikeSvg } from '@/assets/heart.svg';
 import { Count } from '@/Components/Count/Count';
 import { setActiveGender } from '@/features/navigationSlice';
 import { ProductSize } from '@/Components/ProductPage/ProductSize/ProductSize';
 import { Goods } from '@/Components/Goods/Goods';
 import { fetchCategory } from '@/features/goodsSlice';
+import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -87,9 +87,7 @@ export const ProductPage = () => {
               <button type="submit" className={style.addCart}>
                 В корзину
               </button>
-              <button type="button" className={style.favorite} aria-label="Добавить в избранное">
-                <LikeSvg />
-              </button>
+              <BtnFavorites id={id} />
             </div>
           </form>
         </Container>

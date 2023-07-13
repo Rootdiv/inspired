@@ -2,6 +2,7 @@ import { Container } from '@/Components/Layout/Container/Container';
 import { Product } from '@/Components/Product/Product';
 import style from './Goods.module.scss';
 import { useSelector } from 'react-redux';
+import { Pagination } from '@/Components/Pagination/Pagination';
 
 export const Goods = ({ title = 'Новинки' }) => {
   const { goodsList } = useSelector(state => state.goods);
@@ -17,6 +18,7 @@ export const Goods = ({ title = 'Новинки' }) => {
             </li>
           ))}
         </ul>
+        <Pagination />
       </Container>
     </section>
   );

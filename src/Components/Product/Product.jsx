@@ -1,8 +1,8 @@
 import { API_URL } from '@/const';
 import style from './Product.module.scss';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as LikeSvg } from '@/assets/heart.svg';
 import { ColorList } from '@/Components/ColorList/ColorList';
+import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
 
 export const Product = ({ id, pic, title, price, colors }) => (
   <article className={style.product}>
@@ -12,9 +12,7 @@ export const Product = ({ id, pic, title, price, colors }) => (
     </NavLink>
     <div className={style.row}>
       <p className={style.price}>руб {price}</p>
-      <button className={style.favorite}>
-        <LikeSvg />
-      </button>
+      <BtnFavorites id={id} />
     </div>
     <ColorList colors={colors} />
   </article>
