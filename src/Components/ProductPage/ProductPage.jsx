@@ -10,7 +10,7 @@ import { ColorList } from '@/Components/ColorList/ColorList';
 import { ReactComponent as LikeSvg } from '@/assets/heart.svg';
 import { Count } from '@/Components/Count/Count';
 import { setActiveGender } from '@/features/navigationSlice';
-import { ProductSize } from '@/Components/ProductSize/ProductSize';
+import { ProductSize } from '@/Components/ProductPage/ProductSize/ProductSize';
 import { Goods } from '@/Components/Goods/Goods';
 import { fetchCategory } from '@/features/goodsSlice';
 
