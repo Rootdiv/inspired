@@ -52,6 +52,7 @@ export const Pagination = () => {
   };
 
   return (
+    pages !== 1 &&
     totalCount && (
       <div className={style.pagination}>
         <button type="button" className={style.arrow} onClick={handlePrevPage} disabled={page <= 2}>
