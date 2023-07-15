@@ -2,38 +2,39 @@ import style from './Pagination.module.scss';
 import cn from 'classnames';
 import { ReactComponent as PrevSvg } from '@/assets/prev.svg';
 import { ReactComponent as NextSvg } from '@/assets/next.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import { setPage } from '@/features/goodsSlice';
+import { useEffect, useState } from 'react';
 
 export const Pagination = () => {
+  const [pagePagination, setPagePagination] = useState('');
   const pathname = useLocation().pathname;
-  const { page, pages, totalCount } = useSelector(state => state.goods);
-  const dispatch = useDispatch();
+  const { page, pages } = useSelector(state => state.goods);
+
+  useEffect(() => {
+    setPagePagination(page);
+  }, [page]);
 
   const handlePageChange = newPage => {
-    dispatch(setPage(newPage));
+    setPagePagination(newPage);
   };
 
   const handlePrevPage = () => {
     if (page > 1) {
-      handlePageChange(page - 1);
+      handlePageChange(pagePagination - 1);
     }
   };
 
   const handleNextPage = () => {
-    if (page < pages) {
-      handlePageChange(page + 1);
+    if (pagePagination < pages) {
+      handlePageChange(pagePagination + 1);
     }
   };
 
   const renderPaginationItems = () => {
     const paginationItems = [];
-    let startPage = Math.max(1, page - 1);
+    let startPage = pagePagination === pages && pages >= 3 ? pagePagination - 2 : Math.max(1, pagePagination - 1);
     let endPage = Math.min(startPage + 2, pages);
-    if (startPage + 1 === endPage) {
-      startPage = Math.max(1, page - 2);
-    }
 
     for (let i = startPage; i <= endPage; i++) {
       paginationItems.push(
@@ -52,10 +53,9 @@ export const Pagination = () => {
   };
 
   return (
-    pages !== 1 &&
-    !!totalCount && (
+    pages > 1 && (
       <div className={style.pagination}>
-        <button type="button" className={style.arrow} onClick={handlePrevPage} disabled={page <= 2}>
+        <button type="button" className={style.arrow} onClick={handlePrevPage} disabled={pagePagination <= 2}>
           <PrevSvg />
         </button>
         <ul className={style.list}>{renderPaginationItems()}</ul>
@@ -63,7 +63,7 @@ export const Pagination = () => {
           type="button"
           className={style.arrow}
           onClick={handleNextPage}
-          disabled={page >= pages - 1 || pages <= 3}>
+          disabled={pagePagination >= pages - 1 || pages <= 3}>
           <NextSvg />
         </button>
       </div>
