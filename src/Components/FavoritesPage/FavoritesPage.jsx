@@ -11,15 +11,14 @@ export const FavoritesPage = () => {
   const page = usePageFromSearchParam(dispatch);
 
   useEffect(() => {
-    if (favorites.length) {
-      const param = { list: favorites };
-      if (page) {
-        param.page = page;
-      }
+    const param = { list: favorites };
 
-      dispatch(fetchFavorites(param));
-      dispatch(setActiveGender(''));
+    if (page) {
+      param.page = page;
     }
+
+    dispatch(fetchFavorites(param));
+    dispatch(setActiveGender(''));
   }, [favorites, page, dispatch]);
 
   return <Goods title="Избранное" />;
