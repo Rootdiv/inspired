@@ -84,6 +84,19 @@
   line-height: 18px;
 }
 
+.count {
+  position: relative;
+}
+
+.countItem {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+}
+
 .favorites {
   color: transparent;
 

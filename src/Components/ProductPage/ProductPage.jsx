@@ -13,6 +13,7 @@ import { ProductSize } from '@/Components/ProductPage/ProductSize/ProductSize';
 import { Goods } from '@/Components/Goods/Goods';
 import { fetchCategory } from '@/features/goodsSlice';
 import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
+import { addToCart } from '@/features/cartSlice';
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -21,6 +22,7 @@ export const ProductPage = () => {
   const {
     product: { pic, title, price, colors, size, description, gender, category },
   } = useSelector(state => state.product);
+  const { colorList } = useSelector(state => state.colors);
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -56,12 +58,25 @@ export const ProductPage = () => {
     setSelectedSize(event.target.value);
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (selectedSize === '') return;
+    dispatch(addToCart({ id, color: selectedColor, size: selectedSize, count }));
+  };
+
+  useEffect(() => {
+    if (colorList?.length && colors?.length) {
+      const colorTitle = colorList.find(color => color.id === colors[0]).title;
+      setSelectedColor(colorTitle);
+    }
+  }, [colorList, colors]);
+
   return (
     <>
       <section className={style.card}>
         <Container className={style.container}>
           <img src={pic ? `${API_URL}/${pic}` : ''} alt={title} className={style.image} />
-          <form className={style.content}>
+          <form className={style.content} onSubmit={handleSubmit}>
             <h2 className={style.title}>{title}</h2>
             <p className={style.price}>руб {price}</p>
             <div className={style.vendorCode}>
@@ -70,7 +85,12 @@ export const ProductPage = () => {
             </div>
             <div className={style.color}>
               <p className={cn(style.subtitle, style.colorTitle)}>Цвет</p>
-              <ColorList colors={colors} selectedColor={selectedColor} handleColorChange={handleColorChange} />
+              <ColorList
+                colors={colors}
+                selectedColor={selectedColor}
+                handleColorChange={handleColorChange}
+                setSelectedColor={setSelectedColor}
+              />
             </div>
             <ProductSize size={size} selectedSize={selectedSize} handleSizeChange={handleSizeChange} />
             <div className={style.description}>
