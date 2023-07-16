@@ -61,6 +61,7 @@
 
 .link {
   position: relative;
+  display: inline-block;
   transition: color 0.3s ease-in-out;
 
   &:hover {
@@ -70,31 +71,18 @@
 
 .linkCount {
   position: absolute;
-  display: block;
+  display: inline-block;
   width: 18px;
   height: 18px;
   border-radius: 50%;
   color: #ffffff;
-  top: 0;
-  right: -6px;
+  top: -4px;
+  right: -10px;
   background-color: #000000;
   text-align: center;
   font-weight: 600;
   font-size: 9px;
   line-height: 18px;
-}
-
-.count {
-  position: relative;
-}
-
-.countItem {
-  position: absolute;
-  top: 0;
-  left: 25px;
-  width: 15px;
-  height: 15px;
-  font-size: 12px;
 }
 
 .favorites {

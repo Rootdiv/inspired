@@ -27,11 +27,11 @@ export const Top = () => {
                 <SearchSvg />
               </button>
             </li>
-            <li className={cn(style.navItem, style.count)}>
+            <li className={cn(style.navItem)}>
               <NavLink to="/cart" className={style.link}>
                 <CartSvg />
+                {countItems > 0 && <span className={style.linkCount}>{countItems}</span>}
               </NavLink>
-              {countItems > 0 && <span className={style.countItem}>{countItems}</span>}
             </li>
             <li className={style.navItem}>
               <NavLink to="/favorites" className={cn(style.link, style.favorites)}>

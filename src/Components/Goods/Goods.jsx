@@ -8,12 +8,13 @@ export const Goods = ({ title }) => {
   const { goodsList } = useSelector(state => state.goods);
   const { totalCount } = useSelector(state => state.goods);
 
-  const counter = totalCount ? ` (${totalCount})` : '';
-
   return (
     <section className={style.goods}>
       <Container>
-        <h2 className={style.title}>{title ? `${title}${counter}` : 'Новинки'}</h2>
+        <h2 className={style.title}>
+          {title ?? 'Новинки'}
+          {totalCount && <sup>&nbsp;({totalCount})</sup>}
+        </h2>
         <ul className={style.list}>
           {goodsList.map(item => (
             <li key={item.id}>
