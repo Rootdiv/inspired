@@ -4,13 +4,13 @@ export const Development = () => (
   <div className={style.development}>
     <ul className={style.developmentList}>
       <li className={style.developmentItem}>
-        Designer:{' '}
+        Designer:
         <a className={style.link} href="https://t.me/Mrshmallowww">
           Anastasia Ilina
         </a>
       </li>
       <li className={style.developmentItem}>
-        Developer:{' '}
+        Developer:
         <a className={style.link} href="mailto:web-master@rootdiv.ru">
           Владимир
         </a>

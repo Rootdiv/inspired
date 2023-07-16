@@ -28,4 +28,10 @@
       gap: 4px;
     }
   }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
