@@ -4,8 +4,8 @@ import { CartItem } from '@/Components/CartPage/Cart/CartItem/CartItem';
 
 export const Cart = ({ cartItems, goodsList }) => {
   const totalPrice = cartItems.reduce((total, item) => {
-    const itemList = goodsList.find(cartItem => cartItem.id === item.id);
-    return itemList && itemList?.price * item.count + total;
+    const product = goodsList.find(product => product.id === item.id);
+    return product && product.price * item.count + total;
   }, 0);
 
   return (
