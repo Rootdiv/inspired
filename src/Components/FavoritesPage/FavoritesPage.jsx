@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory as fetchFavorites } from '@/features/goodsSlice';
 import { usePageFromSearchParam } from '@/hooks/usePageFromSearchParam';
 import { setActiveGender } from '@/features/navigationSlice';
+import style from './FavoritePage.module.scss';
+import { Container } from '@/Components/Layout/Container/Container';
 
 export const FavoritesPage = () => {
   const dispatch = useDispatch();
@@ -21,5 +23,14 @@ export const FavoritesPage = () => {
     dispatch(setActiveGender(''));
   }, [favorites, page, dispatch]);
 
-  return <Goods title="Избранное" />;
+  return favorites.length ? (
+    <Goods title="Избранное" />
+  ) : (
+    <section>
+      <Container>
+        <h2 className={style.title}>Избранное</h2>
+        <p className={style.empty}>Сейчас в избранное ничего не добавлено</p>
+      </Container>
+    </section>
+  );
 };
