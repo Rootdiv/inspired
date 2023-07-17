@@ -36,6 +36,7 @@ const goodsSlice = createSlice({
     builder
       .addCase(fetchGender.pending, state => {
         state.status = 'loading';
+        state.totalCount = null;
       })
       .addCase(fetchGender.fulfilled, (state, action) => {
         state.status = 'success';

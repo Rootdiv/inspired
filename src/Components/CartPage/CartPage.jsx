@@ -1,6 +1,7 @@
 import { Cart } from '@/Components/CartPage/Cart/Cart';
 import { Order } from '@/Components/CartPage/Order/Order';
 import { OrderModal } from '@/Components/CartPage/OrderModal/OrderModal';
+import { Preloader } from '@/Components/Preloader/Preloader';
 import { fetchCategory as fetchAll } from '@/features/goodsSlice';
 import { setActiveGender } from '@/features/navigationSlice';
 import { useEffect, useState } from 'react';
@@ -8,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const CartPage = () => {
   const { cartItems, countItems, orderStatus } = useSelector(state => state.cart);
-  const { goodsList } = useSelector(state => state.goods);
+  const { status, goodsList } = useSelector(state => state.goods);
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
 
@@ -23,7 +24,9 @@ export const CartPage = () => {
     }
   }, [cartItems, count, countItems, dispatch]);
 
-  return (
+  return status === 'loading' ? (
+    <Preloader />
+  ) : (
     <>
       <Cart cartItems={cartItems} goodsList={goodsList} />
       {goodsList.length && <Order cartItems={cartItems} />}

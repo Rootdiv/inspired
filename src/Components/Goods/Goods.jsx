@@ -3,7 +3,7 @@ import { Product } from '@/Components/Product/Product';
 import style from './Goods.module.scss';
 import { useSelector } from 'react-redux';
 import { Pagination } from '@/Components/Pagination/Pagination';
-import { Circles } from 'react-loader-spinner';
+import { Preloader } from '@/Components/Preloader/Preloader';
 
 export const Goods = ({ title }) => {
   const { status, goodsList } = useSelector(state => state.goods);
@@ -15,21 +15,12 @@ export const Goods = ({ title }) => {
     <section className={style.goods}>
       <Container>
         {status === 'loading' ? (
-          <Circles
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="circles-loading"
-            wrapperStyle={{
-              justifyContent: 'center',
-            }}
-            visible={true}
-          />
+          <Preloader />
         ) : (
           <>
             <h2 className={style.title}>
               {title ?? 'Новинки'}
-              {counter && <sup>&nbsp;({counter})</sup>}
+              {counter && title && <sup>&nbsp;({counter})</sup>}
             </h2>
             <ul className={style.list}>
               {goodsList.map(item => (
