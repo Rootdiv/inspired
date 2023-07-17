@@ -4,19 +4,20 @@ import { fetchCategory as fetchAll } from '@/features/goodsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './SearchPage.module.scss';
 import { useEffect } from 'react';
-import { toggleSearch } from '@/features/searchSlice';
+import { useSearchParams } from 'react-router-dom';
 import { setActiveGender } from '@/features/navigationSlice';
 
 export const SearchPage = () => {
   const { goodsList } = useSelector(state => state.goods);
-  const { search } = useSelector(state => state.search);
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
+    const search = searchParams.get('q');
     dispatch(fetchAll({ search, count: 'all' }));
     dispatch(setActiveGender(''));
-    dispatch(toggleSearch());
-  }, [search, dispatch]);
+  }, [searchParams, dispatch]);
 
   return goodsList.length ? (
     <Goods title="Результаты поиска" />

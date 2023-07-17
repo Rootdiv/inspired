@@ -3,17 +3,19 @@ import style from './Search.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { searchQuery } from '@/features/searchSlice';
 import { useNavigate } from 'react-router-dom';
+import { toggleSearch } from '@/features/searchSlice';
 
 export const Search = () => {
   const { openSearch } = useSelector(state => state.search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleSubmitOrder = values => {
-    dispatch(searchQuery(values));
-    navigate(`/search?q=${values.search}`);
+  const handleSubmitOrder = ({ search }) => {
+    if (search.trim()) {
+      navigate(`/search?q=${search}`);
+      dispatch(toggleSearch(false));
+    }
   };
 
   const validationSchema = Yup.object({

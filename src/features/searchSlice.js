@@ -4,14 +4,10 @@ const searchSlice = createSlice({
   name: 'search',
   initialState: {
     openSearch: false,
-    search: '',
   },
   reducers: {
     toggleSearch(state) {
       state.openSearch = !state.openSearch;
-    },
-    searchQuery(state, action) {
-      state.search = action.payload.search;
     },
   },
 });
