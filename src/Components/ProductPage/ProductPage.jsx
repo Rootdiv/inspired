@@ -14,6 +14,8 @@ import { Goods } from '@/Components/Goods/Goods';
 import { fetchCategory } from '@/features/goodsSlice';
 import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
 import { addToCart } from '@/features/cartSlice';
+import { ErrorMessage, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -39,7 +41,10 @@ export const ProductPage = () => {
 
   const [count, setCount] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState('');
+
+  const validationSchema = Yup.object({
+    selectedSize: Yup.string().required('Необходимо выбрать размер'),
+  });
 
   const handleIncrement = () => {
     setCount(prevCount => prevCount + 1);
@@ -54,13 +59,7 @@ export const ProductPage = () => {
     setSelectedColor(event.target.value);
   };
 
-  const handleSizeChange = event => {
-    setSelectedSize(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    if (selectedSize === '') return;
+  const handleSubmit = ({ selectedSize }) => {
     dispatch(addToCart({ id, color: selectedColor, size: selectedSize, count }));
   };
 
@@ -76,40 +75,43 @@ export const ProductPage = () => {
       <section className={style.card}>
         <Container className={style.container}>
           <img src={pic ? `${API_URL}/${pic}` : ''} alt={title} className={style.image} />
-          <form className={style.content} onSubmit={handleSubmit}>
-            <h2 className={style.title}>{title}</h2>
-            <p className={style.price}>руб {price}</p>
-            <div className={style.vendorCode}>
-              <span className={style.subtitle}>Артикул</span>
-              <span className={style.id}>{id}</span>
-            </div>
-            <div className={style.color}>
-              <p className={cn(style.subtitle, style.colorTitle)}>Цвет</p>
-              <ColorList
-                colors={colors}
-                selectedColor={selectedColor}
-                handleColorChange={handleColorChange}
-                setSelectedColor={setSelectedColor}
-              />
-            </div>
-            <ProductSize size={size} selectedSize={selectedSize} handleSizeChange={handleSizeChange} />
-            <div className={style.description}>
-              <p className={cn(style.subtitle, style.descriptionTitle)}>Описание</p>
-              <p className={style.descriptionText}>{description}</p>
-            </div>
-            <div className={style.control}>
-              <Count
-                className={style.count}
-                count={count}
-                handleIncrement={handleIncrement}
-                handleDecrement={handleDecrement}
-              />
-              <button type="submit" className={style.addCart}>
-                В корзину
-              </button>
-              <BtnFavorites id={id} />
-            </div>
-          </form>
+          <Formik initialValues={{ selectedSize: '' }} validationSchema={validationSchema} onSubmit={handleSubmit}>
+            <Form className={style.content}>
+              <h2 className={style.title}>{title}</h2>
+              <p className={style.price}>руб {price}</p>
+              <div className={style.vendorCode}>
+                <span className={style.subtitle}>Артикул</span>
+                <span className={style.id}>{id}</span>
+              </div>
+              <div className={style.color}>
+                <p className={cn(style.subtitle, style.colorTitle)}>Цвет</p>
+                <ColorList
+                  colors={colors}
+                  selectedColor={selectedColor}
+                  handleColorChange={handleColorChange}
+                  setSelectedColor={setSelectedColor}
+                />
+              </div>
+              <ProductSize size={size} />
+              <div className={style.description}>
+                <p className={cn(style.subtitle, style.descriptionTitle)}>Описание</p>
+                <p className={style.descriptionText}>{description}</p>
+              </div>
+              <div className={style.control}>
+                <Count
+                  className={style.count}
+                  count={count}
+                  handleIncrement={handleIncrement}
+                  handleDecrement={handleDecrement}
+                />
+                <button type="submit" className={style.addCart}>
+                  В корзину
+                </button>
+                <BtnFavorites id={id} />
+              </div>
+              <ErrorMessage className={style.error} name="selectedSize" component={'div'} />
+            </Form>
+          </Formik>
         </Container>
       </section>
       <Goods title="Вам также может понравиться" />
