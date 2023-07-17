@@ -9,6 +9,8 @@ export const Goods = ({ title }) => {
   const { status, goodsList } = useSelector(state => state.goods);
   const { totalCount } = useSelector(state => state.goods);
 
+  const counter = totalCount || goodsList.length;
+
   return (
     <section className={style.goods}>
       <Container>
@@ -27,7 +29,7 @@ export const Goods = ({ title }) => {
           <>
             <h2 className={style.title}>
               {title ?? 'Новинки'}
-              {totalCount && <sup>&nbsp;({totalCount})</sup>}
+              {counter && <sup>&nbsp;({counter})</sup>}
             </h2>
             <ul className={style.list}>
               {goodsList.map(item => (
