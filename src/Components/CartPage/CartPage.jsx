@@ -1,12 +1,13 @@
 import { Cart } from '@/Components/CartPage/Cart/Cart';
 import { Order } from '@/Components/CartPage/Order/Order';
+import { OrderModal } from '@/Components/CartPage/OrderModal/OrderModal';
 import { fetchCategory as fetchAll } from '@/features/goodsSlice';
 import { setActiveGender } from '@/features/navigationSlice';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const CartPage = () => {
-  const { cartItems, countItems } = useSelector(state => state.cart);
+  const { cartItems, countItems, orderStatus } = useSelector(state => state.cart);
   const { goodsList } = useSelector(state => state.goods);
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
@@ -25,7 +26,8 @@ export const CartPage = () => {
   return (
     <>
       <Cart cartItems={cartItems} goodsList={goodsList} />
-      <Order cartItems={cartItems} />
+      {goodsList.length && <Order cartItems={cartItems} />}
+      {orderStatus === 'success' && <OrderModal />}
     </>
   );
 };
