@@ -20,7 +20,7 @@ export const Goods = ({ title }) => {
           <>
             <h2 className={style.title}>
               {title ?? 'Новинки'}
-              {counter && title && <sup>&nbsp;({counter})</sup>}
+              {!!counter && title && <sup>&nbsp;({counter})</sup>}
             </h2>
             <ul className={style.list}>
               {goodsList.map(item => (
