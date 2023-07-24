@@ -5,7 +5,7 @@ import { setPage } from '@/features/goodsSlice';
 export const usePageFromSearchParam = dispatch => {
   const location = useLocation();
   const searchPrams = new URLSearchParams(location.search);
-  const pageURL = +searchPrams.get('page');
+  const pageURL = +searchPrams.get('page') || 1;
 
   useEffect(() => {
     dispatch(setPage(pageURL));

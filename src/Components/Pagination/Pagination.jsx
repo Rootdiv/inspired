@@ -7,7 +7,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export const Pagination = () => {
-  const [pagePagination, setPagePagination] = useState('');
+  const [pagePagination, setPagePagination] = useState(1);
   const pathname = useLocation().pathname;
   const { page, pages } = useSelector(state => state.goods);
 
