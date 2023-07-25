@@ -1,4 +1,4 @@
-import { Circles } from 'react-loader-spinner';
+import { Circles, ThreeCircles } from 'react-loader-spinner';
 
 const style = {
   display: 'flex',
@@ -6,17 +6,25 @@ const style = {
   padding: '100px 0',
 };
 
+const styleProduct = {
+  display: 'flex',
+  padding: '50px',
+};
+
 export const Preloader = () => (
   <div style={style}>
-    <Circles
-      height={140}
-      width={140}
+    <Circles width={170} height={240} color="#4fa94d" ariaLabel="circles-loading" />
+  </div>
+);
+
+export const ProductPreloader = () => (
+  <div style={styleProduct}>
+    <ThreeCircles
+      width={170}
+      height={240}
       color="#4fa94d"
-      ariaLabel="circles-loading"
-      wrapperStyle={{
-        justifyContent: 'center',
-      }}
-      visible={true}
+      ariaLabel="three-circles-rotating"
+      wrapperStyle={{ justifyContent: 'center' }}
     />
   </div>
 );

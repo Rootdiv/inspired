@@ -8,7 +8,7 @@ export const ColorList = ({ colors, validate }) => {
 
   return validate ? (
     <div className={style.colorList}>
-      {colors.map(id => {
+      {colors?.map(id => {
         const color = colorList.find(color => color.id === id);
         return <ColorLabel key={id} color={color} />;
       })}
@@ -16,7 +16,7 @@ export const ColorList = ({ colors, validate }) => {
   ) : (
     <ul className={style.colorList}>
       {colors.map((id, idx) => {
-        const colorCode = colorList.find(color => color.id === id).code;
+        const colorCode = colorList.find(color => color.id === id)?.code;
         return <Color key={id} color={colorCode} check={!idx} />;
       })}
     </ul>

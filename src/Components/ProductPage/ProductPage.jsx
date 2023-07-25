@@ -16,6 +16,7 @@ import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
 import { addToCart } from '@/features/cartSlice';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { Img } from '@/Components/Img/Img';
 
 export const ProductPage = () => {
   const { id } = useParams();
@@ -64,7 +65,7 @@ export const ProductPage = () => {
       <>
         <section className={style.card}>
           <Container className={style.container}>
-            <img src={pic ? `${API_URL}/${pic}` : ''} alt={title} className={style.image} />
+            <Img src={`${API_URL}/${pic}`} alt={title} className={style.image} />
             <Formik
               initialValues={{
                 color: colorList.filter(item => colors.includes(item.id))[0].title,
