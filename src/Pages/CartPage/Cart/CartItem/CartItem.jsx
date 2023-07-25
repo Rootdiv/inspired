@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from './CartItem.module.scss';
 import { API_URL } from '@/const';
 import cn from 'classnames';
-import { Count } from '@/Components/Count/Count';
+import { Count } from '@/Components/Common/Count/Count';
 import { addToCart, removeFromCart } from '@/features/cartSlice';
 
 export const CartItem = ({ id, color, size, count, goodsList }) => {

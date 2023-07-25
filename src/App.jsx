@@ -1,15 +1,15 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { Root } from '@/routes/Root';
-import { MainPage } from '@/Components/MainPage/MainPage';
-import { ErrorPage } from '@/Components/ErrorPage/ErrorPage';
+import { MainPage } from '@/Pages/MainPage/MainPage';
+import { ErrorPage } from '@/Pages/ErrorPage/ErrorPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchNavigation } from '@/features/navigationSlice';
 import { fetchColors } from '@/features/colorsSlice';
-import { ProductPage } from '@/Components/ProductPage/ProductPage';
-import { FavoritesPage } from '@/Components/FavoritesPage/FavoritesPage';
-import { CartPage } from '@/Components/CartPage/CartPage';
-import { SearchPage } from '@/Components/SearchPage/SearchPage';
+import { ProductPage } from '@/Pages/ProductPage/ProductPage';
+import { FavoritesPage } from '@/Pages/FavoritesPage/FavoritesPage';
+import { CartPage } from '@/Pages/CartPage/CartPage';
+import { SearchPage } from '@/Pages/SearchPage/SearchPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,9 +1,9 @@
 import { API_URL } from '@/const';
 import style from './Product.module.scss';
 import { NavLink } from 'react-router-dom';
-import { ColorList } from '@/Components/ColorList/ColorList';
-import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
-import { Img } from '@/Components/Img/Img';
+import { ColorList } from '@/Components/Common/ColorList/ColorList';
+import { BtnFavorites } from '@/Components/Common/BtnFavorites/BtnFavorites';
+import { Img } from '@/Components/Common/Img/Img';
 
 export const Product = ({ id, pic, title, price, colors }) => (
   <article className={style.product}>

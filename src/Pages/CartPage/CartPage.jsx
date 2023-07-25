@@ -1,7 +1,7 @@
-import { Cart } from '@/Components/CartPage/Cart/Cart';
-import { Order } from '@/Components/CartPage/Order/Order';
-import { OrderModal } from '@/Components/CartPage/OrderModal/OrderModal';
-import { Preloader } from '@/Components/Preloader/Preloader';
+import { Cart } from '@/Pages/CartPage/Cart/Cart';
+import { Order } from '@/Pages/CartPage/Order/Order';
+import { OrderModal } from '@/Pages/CartPage/OrderModal/OrderModal';
+import { Preloader } from '@/Components/Common/Preloader/Preloader';
 import { fetchCategory as fetchAll } from '@/features/goodsSlice';
 import { setActiveGender } from '@/features/navigationSlice';
 import { useEffect, useState } from 'react';

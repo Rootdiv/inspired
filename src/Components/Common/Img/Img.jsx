@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProductPreloader } from '@/Components/Preloader/Preloader';
+import { ProductPreloader } from '@/Components/Common/Preloader/Preloader';
 
 export const Img = ({ className, src, alt }) => {
   const [loading, setLoading] = useState(true);

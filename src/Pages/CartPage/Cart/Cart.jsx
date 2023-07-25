@@ -1,6 +1,6 @@
 import { Container } from '@/Components/Layout/Container/Container';
 import style from './Cart.module.scss';
-import { CartItem } from '@/Components/CartPage/Cart/CartItem/CartItem';
+import { CartItem } from '@/Pages/CartPage/Cart/CartItem/CartItem';
 
 export const Cart = ({ cartItems, goodsList }) => {
   const totalPrice = cartItems.reduce((total, item) => {

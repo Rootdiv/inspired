@@ -6,17 +6,17 @@ import { fetchProduct } from '@/features/productSlice';
 import { useParams } from 'react-router-dom';
 import { API_URL } from '@/const';
 import cn from 'classnames';
-import { ColorList } from '@/Components/ColorList/ColorList';
-import { Count } from '@/Components/Count/Count';
+import { ColorList } from '@/Components/Common/ColorList/ColorList';
+import { Count } from '@/Components/Common/Count/Count';
 import { setActiveGender } from '@/features/navigationSlice';
-import { ProductSize } from '@/Components/ProductPage/ProductSize/ProductSize';
+import { ProductSize } from '@/Pages/ProductPage/ProductSize/ProductSize';
 import { Goods } from '@/Components/Goods/Goods';
 import { fetchCategory } from '@/features/goodsSlice';
-import { BtnFavorites } from '@/Components/BtnFavorites/BtnFavorites';
+import { BtnFavorites } from '@/Components/Common/BtnFavorites/BtnFavorites';
 import { addToCart } from '@/features/cartSlice';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Img } from '@/Components/Img/Img';
+import { Img } from '@/Components/Common/Img/Img';
 
 export const ProductPage = () => {
   const { id } = useParams();

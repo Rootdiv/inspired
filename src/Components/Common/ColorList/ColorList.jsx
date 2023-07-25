@@ -1,7 +1,7 @@
-import { Color } from '@/Components/ColorList/Color/Color';
+import { Color } from '@/Components/Common/ColorList/Color/Color';
 import style from './ColorList.module.scss';
 import { useSelector } from 'react-redux';
-import { ColorLabel } from '@/Components/ColorList/ColorLabel/ColorLabel';
+import { ColorLabel } from '@/Components/Common/ColorList/ColorLabel/ColorLabel';
 
 export const ColorList = ({ colors, validate }) => {
   const { colorList } = useSelector(state => state.colors);
