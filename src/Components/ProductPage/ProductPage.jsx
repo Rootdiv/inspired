@@ -114,7 +114,7 @@ export const ProductPage = () => {
           </Formik>
         </Container>
       </section>
-      <Goods title="Вам также может понравиться" />
+      <Goods title="Вам также может понравиться" noCounter />
     </>
   );
 };

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Pagination } from '@/Components/Pagination/Pagination';
 import { Preloader } from '@/Components/Preloader/Preloader';
 
-export const Goods = ({ title }) => {
+export const Goods = ({ title, noCounter = false }) => {
   const { status, goodsList } = useSelector(state => state.goods);
   const { totalCount } = useSelector(state => state.goods);
 
@@ -20,7 +20,7 @@ export const Goods = ({ title }) => {
           <>
             <h2 className={style.title}>
               {title ?? 'Новинки'}
-              {!!counter && title && <sup>&nbsp;({counter})</sup>}
+              {counter > 0 && title && !noCounter && <sup>&nbsp;({counter})</sup>}
             </h2>
             <ul className={style.list}>
               {goodsList.map(item => (
