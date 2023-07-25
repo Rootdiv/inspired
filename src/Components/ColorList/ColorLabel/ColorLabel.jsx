@@ -1,15 +1,9 @@
 import style from './ColorLabel.module.scss';
+import { Field } from 'formik';
 
-export const ColorLabel = ({ color, check, selectedColor, handleColorChange }) => (
+export const ColorLabel = ({ color }) => (
   <label className={style.color} style={{ '--data-color': color?.code }}>
-    <input
-      type="radio"
-      name="color"
-      value={color?.title}
-      className={style.input}
-      checked={selectedColor ? selectedColor === color?.title : check}
-      onChange={handleColorChange}
-    />
+    <Field type="radio" name="color" value={color?.title} className={style.input} />
     <span className={style.colorCheck}></span>
   </label>
 );

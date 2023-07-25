@@ -22,9 +22,10 @@ export const ProductPage = () => {
   const dispatch = useDispatch();
 
   const {
+    status: statusProduct,
     product: { pic, title, price, colors, size, description, gender, category },
   } = useSelector(state => state.product);
-  const { colorList } = useSelector(state => state.colors);
+  const { status: statusColor, colorList } = useSelector(state => state.colors);
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -40,7 +41,6 @@ export const ProductPage = () => {
   }, [gender, category, id, dispatch]);
 
   const [count, setCount] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('');
 
   const validationSchema = Yup.object({
     selectedSize: Yup.string().required('Необходимо выбрать размер'),
@@ -55,66 +55,58 @@ export const ProductPage = () => {
     }
   };
 
-  const handleColorChange = event => {
-    setSelectedColor(event.target.value);
+  const handleSubmit = ({ color, selectedSize }) => {
+    dispatch(addToCart({ id, color, size: selectedSize, count }));
   };
-
-  const handleSubmit = ({ selectedSize }) => {
-    dispatch(addToCart({ id, color: selectedColor, size: selectedSize, count }));
-  };
-
-  useEffect(() => {
-    if (colorList?.length && colors?.length) {
-      const colorTitle = colorList.find(color => color.id === colors[0]).title;
-      setSelectedColor(colorTitle);
-    }
-  }, [colorList, colors]);
 
   return (
-    <>
-      <section className={style.card}>
-        <Container className={style.container}>
-          <img src={pic ? `${API_URL}/${pic}` : ''} alt={title} className={style.image} />
-          <Formik initialValues={{ selectedSize: '' }} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            <Form className={style.content}>
-              <h2 className={style.title}>{title}</h2>
-              <p className={style.price}>руб {price}</p>
-              <div className={style.vendorCode}>
-                <span className={style.subtitle}>Артикул</span>
-                <span className={style.id}>{id}</span>
-              </div>
-              <div className={style.color}>
-                <p className={cn(style.subtitle, style.colorTitle)}>Цвет</p>
-                <ColorList
-                  colors={colors}
-                  selectedColor={selectedColor}
-                  handleColorChange={handleColorChange}
-                  setSelectedColor={setSelectedColor}
-                />
-              </div>
-              <ProductSize size={size} />
-              <div className={style.description}>
-                <p className={cn(style.subtitle, style.descriptionTitle)}>Описание</p>
-                <p className={style.descriptionText}>{description}</p>
-              </div>
-              <div className={style.control}>
-                <Count
-                  className={style.count}
-                  count={count}
-                  handleIncrement={handleIncrement}
-                  handleDecrement={handleDecrement}
-                />
-                <button type="submit" className={style.addCart}>
-                  В корзину
-                </button>
-                <BtnFavorites id={id} />
-              </div>
-              <ErrorMessage className={style.error} name="selectedSize" component={'div'} />
-            </Form>
-          </Formik>
-        </Container>
-      </section>
-      <Goods title="Вам также может понравиться" noCounter />
-    </>
+    [statusProduct, statusColor].every(status => status === 'success') && (
+      <>
+        <section className={style.card}>
+          <Container className={style.container}>
+            <img src={pic ? `${API_URL}/${pic}` : ''} alt={title} className={style.image} />
+            <Formik
+              initialValues={{
+                color: colorList.filter(item => colors.includes(item.id))[0].title,
+                selectedSize: '',
+              }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}>
+              <Form className={style.content}>
+                <h2 className={style.title}>{title}</h2>
+                <p className={style.price}>руб {price}</p>
+                <div className={style.vendorCode}>
+                  <span className={style.subtitle}>Артикул</span>
+                  <span className={style.id}>{id}</span>
+                </div>
+                <div className={style.color}>
+                  <p className={cn(style.subtitle, style.colorTitle)}>Цвет</p>
+                  <ColorList colors={colors} validate />
+                </div>
+                <ProductSize size={size} />
+                <div className={style.description}>
+                  <p className={cn(style.subtitle, style.descriptionTitle)}>Описание</p>
+                  <p className={style.descriptionText}>{description}</p>
+                </div>
+                <div className={style.control}>
+                  <Count
+                    className={style.count}
+                    count={count}
+                    handleIncrement={handleIncrement}
+                    handleDecrement={handleDecrement}
+                  />
+                  <button type="submit" className={style.addCart}>
+                    В корзину
+                  </button>
+                  <BtnFavorites id={id} />
+                </div>
+                <ErrorMessage className={style.error} name="selectedSize" component={'div'} />
+              </Form>
+            </Formik>
+          </Container>
+        </section>
+        <Goods title="Вам также может понравиться" noCounter />
+      </>
+    )
   );
 };

@@ -3,29 +3,21 @@ import style from './ColorList.module.scss';
 import { useSelector } from 'react-redux';
 import { ColorLabel } from '@/Components/ColorList/ColorLabel/ColorLabel';
 
-export const ColorList = ({ colors, selectedColor, handleColorChange }) => {
+export const ColorList = ({ colors, validate }) => {
   const { colorList } = useSelector(state => state.colors);
 
-  return handleColorChange ? (
+  return validate ? (
     <div className={style.colorList}>
-      {colors?.map((id, idx) => {
+      {colors.map(id => {
         const color = colorList.find(color => color.id === id);
-        return (
-          <ColorLabel
-            key={id}
-            color={color}
-            check={!idx}
-            selectedColor={selectedColor}
-            handleColorChange={handleColorChange}
-          />
-        );
+        return <ColorLabel key={id} color={color} />;
       })}
     </div>
   ) : (
     <ul className={style.colorList}>
       {colors.map((id, idx) => {
-        const color = colorList.find(color => color.id === id);
-        return <Color key={id} color={color?.code} check={!idx} />;
+        const colorCode = colorList.find(color => color.id === id).code;
+        return <Color key={id} color={colorCode} check={!idx} />;
       })}
     </ul>
   );
