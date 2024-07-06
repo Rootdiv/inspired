@@ -60,6 +60,16 @@ export const ProductPage = () => {
     dispatch(addToCart({ id, color, size: selectedSize, count }));
   };
 
+  if (title === undefined) {
+    return (
+      <section className={style.card}>
+        <Container className={style.container}>
+          <p className={style.notProduct}>Товар не найден</p>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     [statusProduct, statusColor].every(status => status === 'success') && (
       <>
